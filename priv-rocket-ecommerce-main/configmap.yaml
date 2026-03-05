@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stripe-configmap
+  namespace: prod
+data:
+  DEBUG: "False"

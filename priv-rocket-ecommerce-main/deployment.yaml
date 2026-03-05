@@ -25,6 +25,11 @@ spec:
         image: thanh680/rocket-n-05-03-2026:1.0
         ports:
         - containerPort: 5005
+        envFrom:
+          - secretRef:
+              name: stripe-secret
+          - configMapRef:
+              name: stripe-configmap 
 ---
 apiVersion: v1
 kind: Service
