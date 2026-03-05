@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+  labels:
+    name: prod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rocket-n-05-03-2026-deployment
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rocket-n-05-03-2026
+  template:
+    metadata:
+      labels:
+        app: rocket-n-05-03-2026
+    spec:
+      containers:
+      - name: rocket-n-05-03-2026
+        image: thanh680/rocket-n-05-03-2026:1.0
+        ports:
+        - containerPort: 5005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rocket-n-05-03-2026-service
+  namespace: prod
+spec:
+  type: LoadBalancer
+  selector:
+    app: rocket-n-05-03-2026
+  ports:
+  - port: 85
+    targetPort: 5005
+    name: rocket-n-05-03-2026
